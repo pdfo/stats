@@ -3320,6 +3320,61 @@
         "downloads": 275
     },
     {
+        "category": "with_mirrors",
+        "date": "2023-06-29",
+        "downloads": 64
+    },
+    {
+        "category": "with_mirrors",
+        "date": "2023-06-30",
+        "downloads": 33
+    },
+    {
+        "category": "with_mirrors",
+        "date": "2023-07-01",
+        "downloads": 277
+    },
+    {
+        "category": "with_mirrors",
+        "date": "2023-07-02",
+        "downloads": 79
+    },
+    {
+        "category": "with_mirrors",
+        "date": "2023-07-03",
+        "downloads": 5
+    },
+    {
+        "category": "with_mirrors",
+        "date": "2023-07-04",
+        "downloads": 149
+    },
+    {
+        "category": "with_mirrors",
+        "date": "2023-07-05",
+        "downloads": 252
+    },
+    {
+        "category": "with_mirrors",
+        "date": "2023-07-06",
+        "downloads": 42
+    },
+    {
+        "category": "with_mirrors",
+        "date": "2023-07-07",
+        "downloads": 21
+    },
+    {
+        "category": "with_mirrors",
+        "date": "2023-07-08",
+        "downloads": 241
+    },
+    {
+        "category": "with_mirrors",
+        "date": "2023-07-09",
+        "downloads": 198
+    },
+    {
         "category": "without_mirrors",
         "date": "2021-09-02",
         "downloads": 53
@@ -6613,5 +6668,60 @@
         "category": "without_mirrors",
         "date": "2023-06-28",
         "downloads": 33
+    },
+    {
+        "category": "without_mirrors",
+        "date": "2023-06-29",
+        "downloads": 29
+    },
+    {
+        "category": "without_mirrors",
+        "date": "2023-06-30",
+        "downloads": 16
+    },
+    {
+        "category": "without_mirrors",
+        "date": "2023-07-01",
+        "downloads": 40
+    },
+    {
+        "category": "without_mirrors",
+        "date": "2023-07-02",
+        "downloads": 12
+    },
+    {
+        "category": "without_mirrors",
+        "date": "2023-07-03",
+        "downloads": 5
+    },
+    {
+        "category": "without_mirrors",
+        "date": "2023-07-04",
+        "downloads": 23
+    },
+    {
+        "category": "without_mirrors",
+        "date": "2023-07-05",
+        "downloads": 25
+    },
+    {
+        "category": "without_mirrors",
+        "date": "2023-07-06",
+        "downloads": 26
+    },
+    {
+        "category": "without_mirrors",
+        "date": "2023-07-07",
+        "downloads": 21
+    },
+    {
+        "category": "without_mirrors",
+        "date": "2023-07-08",
+        "downloads": 16
+    },
+    {
+        "category": "without_mirrors",
+        "date": "2023-07-09",
+        "downloads": 15
     }
 ]
