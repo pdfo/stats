@@ -40,7 +40,10 @@ def count_github(user, package, path):
 
 def count_conda(package, path):
     """Download count for the Anaconda distribution."""
-    count = int(condastats.cli.overall(package))
+    try:
+        count = int(condastats.cli.overall(package))
+    except (PermissionError, ValueError):
+        count = 0
     archive = _read_archive(path)
     _append(archive, count)
     _write_archive(path, archive)
