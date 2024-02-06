@@ -1,12 +1,7 @@
 import json
-import traceback
-import warnings
 from datetime import date
 from pathlib import Path
-
-import condastats.cli
-import pypistats
-from github import Github
+from urllib.request import urlopen
 
 
 def _read_archive(path):
@@ -32,22 +27,21 @@ def _append(archive, count):
 
 def count_github(user, package, path):
     """Download count for the GitHub repository."""
-    repo = Github().get_repo(f"{user}/{package}")
-    count = sum(sum(map(lambda d: d.download_count, release.get_assets())) for release in repo.get_releases())
+    github_api = urlopen(f"https://api.github.com/repos/{user}/{package}/releases")
+    github_json = json.loads(github_api.read())
+    count = sum(sum(asset["download_count"] for asset in release["assets"]) for release in github_json)
     archive = _read_archive(path)
     _append(archive, count)
     _write_archive(path, archive)
     return count
 
 
-def count_conda(package, path):
+def count_conda(package, channel, path):
     """Download count for the Anaconda distribution."""
+    conda_api = urlopen(f"https://api.anaconda.org/package/{channel}/{package}")
+    conda_json = json.loads(conda_api.read())
+    count = sum(entry["ndownloads"] for entry in conda_json["files"])
     archive = _read_archive(path)
-    try:
-        count = int(condastats.cli.overall(package))
-    except (PermissionError, ValueError) as e:
-        count = sum(map(lambda d: d["downloads"], archive))
-        warnings.warn(f"Could not fetch conda download count: {e}\n{traceback.format_exc()}", RuntimeWarning)
     _append(archive, count)
     _write_archive(path, archive)
     return count
@@ -55,13 +49,12 @@ def count_conda(package, path):
 
 def count_pypi(package, path):
     """Download count for the PyPI distribution."""
-    df = pypistats.overall(package, total=True, format="pandas")
+    pypi_api = urlopen(f"https://pypistats.org/api/packages/{package}/overall")
+    pypi_json = json.loads(pypi_api.read())
     archive = _read_archive(path)
-    for _, data in df.iterrows():
-        if data["category"] != "Total" and all([d["category"] != data["category"] or d["date"] != data["date"] for d in archive]):
-            data_util = data.to_dict()
-            data_util.pop("percent")
-            archive.append(data_util)
+    for data in pypi_json["data"]:
+        if all([d["category"] != data["category"] or d["date"] != data["date"] for d in archive]):
+            archive.append(data)
     archive.sort(key=lambda x: f"{x['category']}{x['date']}")
     _write_archive(path, archive)
     return sum(d["downloads"] for d in archive if d["category"] == "without_mirrors")
@@ -70,7 +63,7 @@ def count_pypi(package, path):
 if __name__ == "__main__":
     archives = Path("archives").resolve(True)
     _write_archive(archives / "total.json", {
-        "conda": count_conda("pdfo", archives / "conda.json"),
+        "conda": count_conda("pdfo", "conda-forge", archives / "conda.json"),
         "github": count_github("pdfo", "pdfo", archives / "github.json"),
         "pypi": count_pypi("pdfo", archives / "pypi.json"),
     })
