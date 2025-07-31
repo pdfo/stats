@@ -7105,6 +7105,21 @@
         "downloads": 166
     },
     {
+        "category": "with_mirrors",
+        "date": "2025-07-27",
+        "downloads": 275
+    },
+    {
+        "category": "with_mirrors",
+        "date": "2025-07-28",
+        "downloads": 1313
+    },
+    {
+        "category": "with_mirrors",
+        "date": "2025-07-29",
+        "downloads": 1416
+    },
+    {
         "category": "without_mirrors",
         "date": "2021-09-02",
         "downloads": 53
@@ -14183,5 +14198,20 @@
         "category": "without_mirrors",
         "date": "2025-07-26",
         "downloads": 146
+    },
+    {
+        "category": "without_mirrors",
+        "date": "2025-07-27",
+        "downloads": 275
+    },
+    {
+        "category": "without_mirrors",
+        "date": "2025-07-28",
+        "downloads": 1042
+    },
+    {
+        "category": "without_mirrors",
+        "date": "2025-07-29",
+        "downloads": 1126
     }
 ]
