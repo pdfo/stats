@@ -1,7 +1,7 @@
 import json
 from datetime import date
 from pathlib import Path
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 
 def _read_archive(path):
@@ -49,7 +49,11 @@ def count_conda(package, channel, path):
 
 def count_pypi(package, path):
     """Download count for the PyPI distribution."""
-    pypi_api = urlopen(f"https://pypistats.org/api/packages/{package}/overall")
+    req = Request(
+        f"https://pypistats.org/api/packages/{package}/overall",
+        headers={"User-Agent": "fetch-download-stats/1.0"},
+    )
+    pypi_api = urlopen(req)
     pypi_json = json.loads(pypi_api.read())
     archive = _read_archive(path)
     for data in pypi_json["data"]:
